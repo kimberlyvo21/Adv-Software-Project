@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import django_heroku
 
 from pathlib import Path
 
@@ -25,7 +26,7 @@ SECRET_KEY = '*x&_bk^k*(&kb4z6y^#6n=ioas9syc+d5h%^hoz39)vt)6q6z#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["a-09.herokuapp.com"]
 
 
 # Application definition
@@ -118,3 +119,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
