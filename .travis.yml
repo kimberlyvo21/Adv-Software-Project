@@ -3,7 +3,7 @@ python:
 - '3.8'
 install:
 - pip install -r requirements-travis.txt
-#- pip install django-allauth
+- pip install django-allauth
 script:
 - python manage.py test
 deploy:
