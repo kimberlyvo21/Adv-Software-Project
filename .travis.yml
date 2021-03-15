@@ -14,4 +14,3 @@ deploy:
   on:
     branch: main
     repo: uva-cs3240-s21/project-a-09
-  skip_cleanup: 'true'
