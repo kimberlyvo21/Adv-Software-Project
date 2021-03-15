@@ -12,5 +12,4 @@ deploy:
     secure: i0U/s9llMoU5EmXsJrda02KP31tOszoRXa3eVxzpKv36D/JRDyFaxDnpRqrMid3nT5s8Z5zQd8Qz+P4Eaw7QpDbL4/8H5lN36wXbRFZORBRiwBFFHZcoDaT2+Lw8MdFXLWtJJSlznwt8xdKydtdGb86gAjcedYkbLPJ1W9YQh74u4EiXdhgVSLUlT5FYZaDipkL4CvKkl97XnwWa9EZdVVg24rPGDeH8E6j/LoEhe4/zm1CEQ/lYJgF5P0UJfIOdjk/f82JtpKcdxRN7RidLZwRlDKDz91v199w6IZOLyo2VZDCRPqVqBj9/aDMO6A6T1A7+wC/Hq974kC3bKwZAJURUJuWxw0T02GbLOaa/GdqKhe902kKztBUm8zF/0Wafj+k59SOxge1VyGPgSyxumLsRgdymmRputoYYKDeW50qmkrZXwG0FirXDU6eWwtqjMg7dTq0XFschpNsCyRy13XAwvDHmmfe9aleDjKGRanLZ0aLcEIs0BqhJPwcCNFW81Md/OOFxiDifkHQH8BGf3/Xp1TihmKerDlyotk51saoClDQOd9xotH93jFulHdQGFEpJFg/9ttVCZ7jgJ/Dj0dkorSCZJ2j/G0NhK/FSJ0OreT8+ka/hSkPs2kx0QGQxFOMursKTsQ3ahoj/BVCsf6hLT/ocq2AMsyQH6dbfRBc=
   app: project-a-09
   on:
-    branch: main
     repo: uva-cs3240-s21/project-a-09
