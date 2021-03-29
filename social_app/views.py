@@ -9,10 +9,8 @@ from django.contrib.auth.models import User
 
 def ProfilePage(request, email):
     try:
-        print(email)
         User.objects.get(email=email)
         selected_profile = Profile.objects.get(email=email)
-        print(selected_profile)
     except(KeyError, User.DoesNotExist, Profile.DoesNotExist):
         name_p = ""
         age_p = ""
@@ -21,11 +19,11 @@ def ProfilePage(request, email):
         if request.method == 'GET':
             return render(request, 'social_app/signup.html')
         if request.method == 'POST':
-            name_p = request.POST.get('name')
+            name_p = request.POST.get('name').lower()
             age_p = request.POST.get('age')
             height_p = request.POST.get('height')
             time_p = request.POST.get('time')
-            profile_idea = Profile(User = User.objects.get(username=name_p) ,name=name_p, age=age_p, height=height_p, time=time_p, email=email)
+            profile_idea = Profile(User = User.objects.get(email=email) ,name=name_p, age=age_p, height=height_p, time=time_p, email=email)
             profile_idea.save()
             return render(request, "social_app/profile.html", {
                 'name': name_p,
