@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="styles.css">
       </head>
       <body>
-        <form action="{% url 'signup' %}" method="post">
+        <form method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="exampleFormControlInput1">Profile Name</label>
@@ -30,12 +30,6 @@
             <label for="exampleFormControlTextarea1">Workout Time Goal (minutes)</label>
             <input type="decimal" class="form-control" id="time" name="time" placeholder="Write your time goal here">
           </div>
-
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Write your email">
-          </div>
-
           <input type="submit" value="Continue">
         </form>
       </body>

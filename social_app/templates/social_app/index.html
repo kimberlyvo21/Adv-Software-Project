@@ -12,7 +12,11 @@
   <!----<h1>My Google Login Project</h1>--->
   {% if user.is_authenticated %}
   <div class= "container p-2">
+    <meta http-equiv="refresh" content="time; URL=social_app/profile">
     <h1>Welcome, {{ user.username }} !</h1>
+    <button type="button" class ="btn btn-outline-primary btn-lg m-5">
+      <a href="{% url 'social_app:profile' user.email %}">Continue to Profile Page</a>
+    </button>
   </div>
   {% else %}
     <div class ="container p-4">
