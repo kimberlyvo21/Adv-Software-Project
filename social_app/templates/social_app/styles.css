@@ -8,3 +8,22 @@
   a:hover{
       color:white;
   }
+
+h2{
+    text-align: center;
+}
+.img-cropper {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 5px solid #555;
+}
+img {
+    display: inline;
+    margin: 0 auto;
+    margin-left: -25%; 
+    height: 100%;
+    width: auto;
+  }
