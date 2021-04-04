@@ -5,4 +5,5 @@ from . import views
 app_name = 'social_app'
 urlpatterns = [
         path('<str:email>', views.ProfilePage, name = 'profile'),
+        path('<str:email>/dashboard', views.Dashboard, name = 'dashboard',)
 ]
