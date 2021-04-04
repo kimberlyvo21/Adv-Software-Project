@@ -13,8 +13,8 @@ class Profile(models.Model):
         return self.name
 
 #Gameifications Badges, Points
-class Dashboard(models.Model):
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
-    Freinds = JSONField()
+#class Dashboard(models.Model):
+#    User = models.ForeignKey(User, on_delete=models.CASCADE)
+#    Freinds = JSONField()
     #WorkOutGoals
-    CurrGoal = models.DecimalField(decimal_places=0, max_digits=4)
+#    CurrGoal = models.DecimalField(decimal_places=0, max_digits=4)

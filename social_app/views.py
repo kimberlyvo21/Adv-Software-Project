@@ -38,12 +38,12 @@ def ProfilePage(request, email):
                     'time' : selected_profile.time,
                 })
 
-def Dashboard(request, email):
-    try:
-        User.objects.get(email=email)
-    except(KeyError, User.DoesNotExist):
-        if request.method == 'GET':
-            return render(request, 'social_app/Dashboard.html')
-        if request.method == 'POST':
-            return render(request,"social_app/Dashboard.html" )
-    return render(request, "social_app/Dashboard.html")
+#def Dashboard(request, email):
+#    try:
+#        User.objects.get(email=email)
+#    except(KeyError, User.DoesNotExist):
+#        if request.method == 'GET':
+#            return render(request, 'social_app/Dashboard.html')
+#        if request.method == 'POST':
+#            return render(request,"social_app/Dashboard.html" )
+#    return render(request, "social_app/Dashboard.html")
