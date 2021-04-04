@@ -13,7 +13,7 @@ class Profile(models.Model):
         return self.name
 
 #Gameifications Badges, Points
-class Dashboard(models.Models):
+class Dashboard(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
     Freinds = JSONField()
     #WorkOutGoals
