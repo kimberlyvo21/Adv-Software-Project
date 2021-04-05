@@ -13,21 +13,28 @@
 
 <body>
   <div class="container">
-    <h1 style="text-align:center">Welcome to your profile page {{name}} !</h1>
-    <div class="card p-5">
+
+    <div class="card ">
+      <h1 class="card-header" style="text-align:center">Welcome to your profile page {{name}}!</h1>
       <div class="text-center">
-        <div class="center img-cropper">
-          <img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">
+        <div class="center">
+          <img style="width: 250px; height: auto; object-fit: cover;border-radius: 50%;"
+            src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg">
+          <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
         </div>
       </div>
       <br>
-      <h1 style="text-align:center"> Your current age is {{age}} !</h1>
+      <h2 style="text-align:center"> Your current age is: {{age}} years old.</h2>
       <br>
-      <h1 style="text-align:center"> Your current height is {{height}} !</h1>
+      <h2 style="text-align:center"> Your current height is: {{height}} ft.</h2>
       <br>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"
-          aria-valuemin="0" aria-valuemax="{{time}}"></div>
+
+      <div class="card p-3 m-3">
+        <h3 style="text-align:center">Here is you progress so far, keep going!</h3>
+        <div class="progress m-5">
+          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"
+            aria-valuemin="0" aria-valuemax="{{time}}"></div>
+        </div>
       </div>
     </div>
   </div>
