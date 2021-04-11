@@ -5,6 +5,8 @@ install:
 - pip install -r requirements-travis.txt
 - pip install django-allauth
 - pip install psycopg2
+services:
+- postgresql
 script:
 - python manage.py test
 deploy:
