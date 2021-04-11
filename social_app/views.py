@@ -105,13 +105,19 @@ def AddWorkout(request, email):
             Dashboard_User.Workout.append(name_w)
             Workouts_User.Workout_Name.append(name_w)
             Workouts_User.Workout_Progress.append(0)
-            Workouts_User.Workout_Goals.append(goals_w)
+            Workouts_User.Workout_Goals.append(int(goals_w))
             Dashboard_User.save()
             Workouts_User.save()
+            Progress_Num = []
+            for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
+                Progress_Num.append((Prog/Goals))
+            }
             return render(request, "social_app/Dashboard.html", {
-            'name' : selected_profile.name,
-            'Friends' : Dashboard_User.Friends,
-            'Workouts': Dashboard_User.Workout,
+                'name' : selected_profile.name,
+                'Friends' : Dashboard_User.Friends,
+                'Workouts': Dashboard_User.Workout,
+                'Progress' : Progress_Num,
+                'length' : len(Dashboard_User.Workout),
             })
         return render(request, "social_app/AddWorkout.html", {
             'error' : "Sorry that workout was already created please make a new one",
