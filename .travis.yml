@@ -17,3 +17,14 @@ deploy:
   on:
     branch: main
     repo: uva-cs3240-s21/project-a-09
+
+  addons:
+  postgresql: "13.2"
+  apt:
+    packages:
+    - postgresql-13.2
+    - postgresql-client-13.2
+env:
+  global:
+  - PGPORT=5433
+  - PGUSER=travis
