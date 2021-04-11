@@ -8,7 +8,8 @@ install:
 services:
 - postgresql
 before_script:
-  - sudo service postgresql start
+- sudo apt-get update
+- sudo service postgresql start
 script:
 - python manage.py test
 deploy:
