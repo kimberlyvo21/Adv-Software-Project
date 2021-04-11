@@ -26,5 +26,5 @@ deploy:
     - postgresql-client-13.2
 env:
   global:
-  - PGPORT=5433
+  - PGPORT=5342
   - PGUSER=travis
