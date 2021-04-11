@@ -8,7 +8,7 @@ install:
 services:
 - postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - sudo service postgresql start
 script:
 - python manage.py test
 deploy:
