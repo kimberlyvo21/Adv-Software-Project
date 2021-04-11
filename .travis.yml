@@ -7,6 +7,9 @@ install:
 - pip install psycopg2
 services:
 - postgresql
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
 script:
 - python manage.py test
 deploy:
@@ -18,13 +21,3 @@ deploy:
     branch: main
     repo: uva-cs3240-s21/project-a-09
 
-  addons:
-  postgresql: "13.2"
-  apt:
-    packages:
-    - postgresql-13.2
-    - postgresql-client-13.2
-env:
-  global:
-  - PGPORT=5342
-  - PGUSER=travis
