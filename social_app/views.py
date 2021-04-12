@@ -1,9 +1,13 @@
+from mysite.settings import YOUTUBE_DATA_API_KEY
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from .models import Profile, Workouts, Dashboard
 from django.contrib.auth.models import User
+import requests
+from isodate import parse_duration
+from django.conf import settings
 
 
 
@@ -57,6 +61,67 @@ def DashboardPage(request, email):
         'Progress' : Progress_Num,
         'length' : len(Dashboard_User.Workout),
     })
+
+def WorkoutPage(request, email):
+    Workouts_User = Workouts.objects.get(User = User.objects.get(email=email))
+    Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
+    selected_profile = Profile.objects.get(email=email)
+    videos = []
+    if request.method == 'POST':
+        search_url = 'https://www.googleapis.com/youtube/v3/search'
+        video_url = 'https://www.googleapis.com/youtube/v3/videos'
+        search_params = {
+            'part' :'snippet',
+            'q' : request.POST['search'],
+            'key' :  settings.YOUTUBE_DATA_API_KEY,
+            'maxResults' : 3,
+        }
+
+        video_ids = []
+        r = requests.get(search_url, params=search_params)
+        results = r.json()['items']
+
+        for result in results:
+            video_ids.append(result['id']['videoId'])
+
+        if request.POST['submit'] == 'lucky':
+            return redirect(f'https://www.youtube.com/watch?v={ video_ids[0] }')
+
+        video_params = {
+            'key' : settings.YOUTUBE_DATA_API_KEY,
+            'part' : 'snippet,contentDetails',
+            'id' : ','.join(video_ids),
+            'maxResults' : 3
+        }
+
+        r = requests.get(video_url, params=video_params)
+        results = r.json()['items']
+        for result in results:
+            print(result)
+            video_data = {
+                'title' : result['snippet']['title'],
+                'id' : result['id'],
+                'url' : f'https://www.youtube.com/watch?v={ result["id"] }',
+                'duration' : int(parse_duration(result['contentDetails']['duration']).total_seconds() // 60),
+                'thumbnail' : result['snippet']['thumbnails']['high']['url']
+            }
+
+            videos.append(video_data)
+    Progress_Num = []
+    for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
+        Progress_Num.append((Prog/Goals)*100)
+    }
+    context = {
+        'videos' : videos,
+        'name' : selected_profile.name,
+        'Friends' : Dashboard_User.Friends,
+        'Workouts': Dashboard_User.Workout,
+        'Progress' : Progress_Num,
+        'length' : len(Dashboard_User.Workout),
+    }
+    
+    return render(request, 'social_app/WorkoutPage.html', context)
+    
 
 def AddFriends(request, email):
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
