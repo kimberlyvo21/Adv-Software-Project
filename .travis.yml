@@ -1,57 +1,34 @@
-# language: python
-# python:
-# - '3.8'
-# install:
-# - pip install -r requirements-travis.txt
-# - pip install django-allauth
-# - pip install psycopg2
-# services:
-# - postgresql
-# env:
-# - DATABASE_URL=postgres://postgres:postgres@localhost/mydb
-# before_script:
-# - sudo apt-get update
-# - sudo service postgresql start
-# - psql -c "CREATE USER myuser WITH PASSWORD 'mypass';" -U postgres
-# - psql -c 'CREATE DATABASE "mydb" OWNER myuser;' -U postgres -p 5342
-# - psql -c 'GRANT ALL PRIVILEGES ON DATABASE "mydb" to myuser;' -U postgres
-# script:
-# - python manage.py test --keepdb
-# deploy:
-#   provider: heroku
-#   api_key:
-#     secure: NM2N+tTy1xWG0wq4gars9TQw3fEb26q2ZCPYuPG/FWIs5uGf1A+IVWdWTzy/dJphekneXeHHgUMXsXlp9eGC9Rqyz4CxWZLgwkMdy+cuvuovZFjui4hgFAdJ9QM2bQqvkPOO/EYY5ySXhVy8w7SKcr5EKixvOd2F/FHZMG3a1gF+sQsOhOLNX223RsKHddCYB/j1Ygp3BZgOJVw8w/icdCumA6rMmTUyLksKD6iMgTSut2Dkwnh63eX0nXCc0liv5y6oPdln0FiGddl4JTea/aCITS/5rzhmLj9NAr/CqkS0nlRJibSskSEp6uYGiifpWCwGkoO98LCTa7wiE01C6SiNwmDiRd08zmnp74qJ34nqrZeioptK3FzTfMb1PBOJCf5DRIhlBghPb5T8063Xidf6QQEZ6Un/0A3qyoohLxzL4g7IXRBjjTEvpAkaoNbSfRJNwjx41JLeXaPiVhu/B5tVQ1EcbuPzHeETGYm2uB/4U7cpsUlD8Llz6isAUjJpVreGUs0EOYZafY6iSmViTpmlH38iWtVoV5AgUy6prMkNzEvCvl/uOhl0sGqIPsjgJp+f8p2vTjmZrrs8a25MNLeaIFfqeXA7RQvZdWqtLLStZksMB/D8T9MdPPusJHnMAedEp1blpVgw4s8pLCypjL4Qzi5FTI0Wrr7YEGN5h+c=
-#   app: project-a-09
-#   on:
-#     branch: main
-#     repo: uva-cs3240-s21/project-a-09
-
 language: python
-services:
-- postgresql
-env:
-- DATABASE_URL=postgres://postgres:postgres@localhost/mydb
+python:
+- '3.8'
 before_install:
 - export DJANGO_SETTINGS_MODULE=project-a-09.settings
 install:
 - pip install -r requirements-travis.txt
+services:
+- postgresql
+env:
+- DATABASE_URL=postgres://postgres:postgres@localhost/mydb
 before_script:
+- sudo apt-get update
+- sudo service postgresql start
 - psql -c "CREATE USER myuser WITH PASSWORD 'mypass';" -U postgres
-- psql -c 'CREATE DATABASE "mydb" OWNER myuser;' -U postgres
+- psql -c 'CREATE DATABASE "mydb" OWNER myuser;' -U postgres -p 5342
 - psql -c 'GRANT ALL PRIVILEGES ON DATABASE "mydb" to myuser;' -U postgres
 script:
 - python manage.py makemigrations
 - python manage.py migrate
 - python manage.py collectstatic --noinput
 - python manage.py test
- deploy:
-   provider: heroku
-   api_key:
-     secure: NM2N+tTy1xWG0wq4gars9TQw3fEb26q2ZCPYuPG/FWIs5uGf1A+IVWdWTzy/dJphekneXeHHgUMXsXlp9eGC9Rqyz4CxWZLgwkMdy+cuvuovZFjui4hgFAdJ9QM2bQqvkPOO/EYY5ySXhVy8w7SKcr5EKixvOd2F/FHZMG3a1gF+sQsOhOLNX223RsKHddCYB/j1Ygp3BZgOJVw8w/icdCumA6rMmTUyLksKD6iMgTSut2Dkwnh63eX0nXCc0liv5y6oPdln0FiGddl4JTea/aCITS/5rzhmLj9NAr/CqkS0nlRJibSskSEp6uYGiifpWCwGkoO98LCTa7wiE01C6SiNwmDiRd08zmnp74qJ34nqrZeioptK3FzTfMb1PBOJCf5DRIhlBghPb5T8063Xidf6QQEZ6Un/0A3qyoohLxzL4g7IXRBjjTEvpAkaoNbSfRJNwjx41JLeXaPiVhu/B5tVQ1EcbuPzHeETGYm2uB/4U7cpsUlD8Llz6isAUjJpVreGUs0EOYZafY6iSmViTpmlH38iWtVoV5AgUy6prMkNzEvCvl/uOhl0sGqIPsjgJp+f8p2vTjmZrrs8a25MNLeaIFfqeXA7RQvZdWqtLLStZksMB/D8T9MdPPusJHnMAedEp1blpVgw4s8pLCypjL4Qzi5FTI0Wrr7YEGN5h+c=
-   app: project-a-09
-   run: rake db:migrate
-   on:
-     repo: uva-cs3240-s21/project-a-09
-     branch: Dashboard
+deploy:
+  provider: heroku
+  api_key:
+    secure: NM2N+tTy1xWG0wq4gars9TQw3fEb26q2ZCPYuPG/FWIs5uGf1A+IVWdWTzy/dJphekneXeHHgUMXsXlp9eGC9Rqyz4CxWZLgwkMdy+cuvuovZFjui4hgFAdJ9QM2bQqvkPOO/EYY5ySXhVy8w7SKcr5EKixvOd2F/FHZMG3a1gF+sQsOhOLNX223RsKHddCYB/j1Ygp3BZgOJVw8w/icdCumA6rMmTUyLksKD6iMgTSut2Dkwnh63eX0nXCc0liv5y6oPdln0FiGddl4JTea/aCITS/5rzhmLj9NAr/CqkS0nlRJibSskSEp6uYGiifpWCwGkoO98LCTa7wiE01C6SiNwmDiRd08zmnp74qJ34nqrZeioptK3FzTfMb1PBOJCf5DRIhlBghPb5T8063Xidf6QQEZ6Un/0A3qyoohLxzL4g7IXRBjjTEvpAkaoNbSfRJNwjx41JLeXaPiVhu/B5tVQ1EcbuPzHeETGYm2uB/4U7cpsUlD8Llz6isAUjJpVreGUs0EOYZafY6iSmViTpmlH38iWtVoV5AgUy6prMkNzEvCvl/uOhl0sGqIPsjgJp+f8p2vTjmZrrs8a25MNLeaIFfqeXA7RQvZdWqtLLStZksMB/D8T9MdPPusJHnMAedEp1blpVgw4s8pLCypjL4Qzi5FTI0Wrr7YEGN5h+c=
+  app: project-a-09
+  run: rake db:migrate
+  on:
+    repo: uva-cs3240-s21/project-a-09
+    branch: main
   skip_cleanup: true
+
 
