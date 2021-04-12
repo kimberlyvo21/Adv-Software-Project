@@ -79,8 +79,8 @@ var progress32 = 50;
         {%for prog in Progress%} 
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" value={{prog}} aria-valuenow={{prog}} aria-valuemin="0" aria-valuemax="100"> {{prog}}</div>
+            <div class="progress" style="height: 25px;">
+              <div class="progress-bar" role="progressbar" style="width: {{ prog }}%;"  aria-valuenow={{prog}} aria-valuemin="0" aria-valuemax="100"> {{prog}}</div>
             </div>
         </li>
         </ul>

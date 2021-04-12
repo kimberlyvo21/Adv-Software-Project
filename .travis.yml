@@ -7,6 +7,8 @@ install:
 - pip install psycopg2
 services:
 - postgresql
+env:
+- DATABASE_URL=postgres://postgres:postgres@localhost/mydb
 before_script:
 - sudo apt-get update
 - sudo service postgresql start
