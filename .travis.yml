@@ -52,6 +52,6 @@ script:
    run: rake db:migrate
    on:
      repo: uva-cs3240-s21/project-a-09
-     branch: main
+     branch: Dashboard
   skip_cleanup: true
 
