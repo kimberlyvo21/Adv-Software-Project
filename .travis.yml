@@ -2,7 +2,7 @@ language: python
 python:
 - '3.8'
 before_install:
-- export DJANGO_SETTINGS_MODULE=project-a-09.settings
+- export DJANGO_SETTINGS_MODULE=mysite.settings
 install:
 - pip install -r requirements-travis.txt
 services:
