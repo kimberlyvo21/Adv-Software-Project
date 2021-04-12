@@ -13,7 +13,7 @@ before_script:
 - sudo apt-get update
 - sudo service postgresql start
 - psql -c "CREATE USER myuser WITH PASSWORD 'mypass';" -U postgres
-- psql -c 'CREATE DATABASE "mydb" OWNER myuser;' -U postgres
+- psql -c 'CREATE DATABASE "mydb" OWNER myuser;' -U postgres -p 5342
 - psql -c 'GRANT ALL PRIVILEGES ON DATABASE "mydb" to myuser;' -U postgres
 script:
 - python manage.py test --keepdb
