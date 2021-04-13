@@ -110,7 +110,7 @@ def AddWorkout(request, email):
             Workouts_User.save()
             Progress_Num = []
             for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
-                Progress_Num.append((Prog/Goals))
+                Progress_Num.append((Prog/Goals)*100)
             }
             return render(request, "social_app/Dashboard.html", {
                 'name' : selected_profile.name,
@@ -145,7 +145,7 @@ def UpdateWorkout(request, email):
     Workouts_User.save()
     Progress_Num = []
     for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
-        Progress_Num.append((Prog/Goals))
+        Progress_Num.append((Prog/Goals)*100)
     }
     return render(request, "social_app/Dashboard.html", {
         'name' : selected_profile.name,
