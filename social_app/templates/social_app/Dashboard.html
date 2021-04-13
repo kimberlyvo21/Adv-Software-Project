@@ -1,9 +1,14 @@
 {% load socialaccount %}
 
+<<<<<<< HEAD
 <!DOCTYPE html>
 <script>
   var progress32 = 50;  
 </script>
+=======
+<!DOCTYPE html> 
+
+>>>>>>> 81574499962fc40d106e17d2f486426449e026dc
 <html>
 
 <head>
@@ -40,7 +45,11 @@
           <a class="nav-link" href="{% url 'social_app:profile' user.email %}">Awards <span
               class="sr-only">(current)</span></a>
         </li>
-  </nav>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'social_app:workout' user.email %}">Workouts <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+      </nav>
 </head>
 
 <body>
