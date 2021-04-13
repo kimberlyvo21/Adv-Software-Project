@@ -35,7 +35,7 @@
           <a class="nav-link" href="{% url 'social_app:dashboard' user.email %}">Dashboard</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'social_app:profile' user.email %}">Friends <span
+          <a class="nav-link" href="{% url 'social_app:profile' user.email %}">Leaderboard<span
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
@@ -103,8 +103,6 @@
               <li class="list-group-item">
                 <div class="progress" style="height: 25px;">
                   <div class="progress-bar" role="progressbar" style="width: {{ prog }}%;"  aria-valuenow={{prog}} aria-valuemin="0" aria-valuemax="100"> {{prog}}</div>
-                </div>
-            </li>
                 </div>
               </li>
             </ul>
