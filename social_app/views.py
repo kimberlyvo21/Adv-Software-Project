@@ -82,6 +82,7 @@ def WorkoutPage(request, email):
         results = r.json()['items']
 
         for result in results:
+            print(result)
             video_ids.append(result['id']['videoId'])
 
         if request.POST['submit'] == 'lucky':
@@ -97,7 +98,6 @@ def WorkoutPage(request, email):
         r = requests.get(video_url, params=video_params)
         results = r.json()['items']
         for result in results:
-            print(result)
             video_data = {
                 'title' : result['snippet']['title'],
                 'id' : result['id'],
@@ -126,6 +126,7 @@ def WorkoutPage(request, email):
 def AddFriends(request, email):
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
     selected_profile = Profile.objects.get(email=email)
+    Workouts_User = Workouts.objects.get(User = User.objects.get(email=email))
     name_p = ""
     if request.method == 'GET':
         return render(request, "social_app/AddFriend.html")
@@ -139,11 +140,17 @@ def AddFriends(request, email):
             })
         Dashboard_User.Friends.append(name_p)
         Dashboard_User.save()
+        Progress_Num = []
+        for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
+            Progress_Num.append((Prog/Goals)*100)
+        }
         return render(request, "social_app/Dashboard.html", {
-        'name' : selected_profile.name,
-        'Friends' : Dashboard_User.Friends,
-        'Workouts': Dashboard_User.Workout,
-    })
+            'name' : selected_profile.name,
+            'Friends' : Dashboard_User.Friends,
+            'Workouts': Dashboard_User.Workout,
+            'Progress' : Progress_Num,
+            'length' : len(Dashboard_User.Workout),
+        })
 
 def FriendPage(request, email, name):
     friend_profile = Profile.objects.get(name=name)
