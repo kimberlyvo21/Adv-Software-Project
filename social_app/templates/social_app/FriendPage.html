@@ -44,7 +44,7 @@
 
 <body>
   <div class="container mt-4">
-    <h3>{{name_f}} 's Community Page</h3>
+    <h3>Leaderboard Page</h3>
     <p>Work towards your goals as a community! See all of your friends progess and motivate them to keep going with a
       little friendly competition :)</p>
 
@@ -61,23 +61,25 @@
               <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
             </div>
           </div>
+          {% for fr in name_f %}
           <div class="col-9" style="text-align: left;">
             <div class="friend-card mt-4">
-              <h4>{{name_f}}</h4>
-              <p>This is {{name_f}}'s overall progress. </p>
-              <div class="progress mr-5 mt-5">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow=20
-                  aria-valuemin="0" aria-valuemax="5000"></div>
-              </div>
-            </div>
+              <h4>{{fr}}</h4>        
           </div>
-
         </div>
+          {% endfor %}
+          {% for lvl in level_f %}
+          <div class="col-9" style="text-align: left;">
+            <div class="friend-card mt-4">
+              <p>Level: {{lvl}}. </p>       
+          </div>
+        </div>
+          {% endfor %}
       </div>
     </div>
 
 <!---Just for visual purposes to see how multiple will look-->
-
+<!--
     <div class="col-lg">
       <div class="card p-3 m-2">
         <div class="row">
@@ -85,7 +87,7 @@
             <div class="center">
               <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
                 src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg">
-              <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
+              <img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">
             </div>
           </div>
           <div class="col-9" style="text-align: left;">
@@ -103,7 +105,7 @@
       </div>
     </div>
 
-
+  -->
 
 
 

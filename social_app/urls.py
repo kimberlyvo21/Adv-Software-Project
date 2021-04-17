@@ -10,5 +10,5 @@ urlpatterns = [
         path('<str:email>/dashboard/AddFriends', views.AddFriends, name = 'AddFriends'),
         path('<str:email>/dashboard/AddWorkout', views.AddWorkout, name = 'AddWorkout'),
         path('<str:email>/dashboard/UpdateWorkout', views.UpdateWorkout, name = 'UpdateWorkout'),
-        path('<str:email>/dashboard/<str:name>', views.FriendPage, name = 'friendpage'),
+        path('<str:email>/dashboard/leaderboard', views.FriendPage, name = 'leaderboard'),
 ]
