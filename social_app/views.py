@@ -137,13 +137,22 @@ def AddFriends(request, email):
             return render(request, "social_app/AddFriend.html", {
                 'error' : "Sorry the user was not found"
             })
-        Dashboard_User.Friends.append(name_p)
-        Dashboard_User.save()
-        return render(request, "social_app/Dashboard.html", {
-        'name' : selected_profile.name,
-        'Friends' : Dashboard_User.Friends,
-        'Workouts': Dashboard_User.Workout,
-    })
+        if name_p in Dashboard_User.Friends:
+            return render(request, "social_app/AddFriend.html", {
+                'error': "User is already added"
+            })
+        elif name_p == selected_profile.name:
+            return render(request, "social_app/AddFriend.html", {
+                'error': "User you are trying to add is yourself"
+            })
+        else:
+            Dashboard_User.Friends.append(name_p)
+            Dashboard_User.save()
+            return render(request, "social_app/Dashboard.html", {
+            'name' : selected_profile.name,
+            'Friends' : Dashboard_User.Friends,
+            'Workouts': Dashboard_User.Workout,
+        })
 
 def FriendPage(request, email, name):
     friend_profile = Profile.objects.get(name=name)
