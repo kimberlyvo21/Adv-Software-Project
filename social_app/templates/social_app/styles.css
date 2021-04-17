@@ -12,6 +12,10 @@
 h2{
     text-align: center;
 }
+
+.friend-card{
+    vertical-align: middle;
+}
 /*.img-cropper {
     width: 300px;
     height: 300px;
