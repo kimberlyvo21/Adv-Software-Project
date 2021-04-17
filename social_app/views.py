@@ -138,18 +138,21 @@ def AddFriends(request, email):
             return render(request, "social_app/AddFriend.html", {
                 'error' : "Sorry the user was not found"
             })
-        Dashboard_User.Friends.append(name_p)
-        Dashboard_User.save()
-        Progress_Num = []
-        for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
-            Progress_Num.append((Prog/Goals)*100)
-        }
-        return render(request, "social_app/Dashboard.html", {
+        if name_p in Dashboard_User.Friends:
+            return render(request, "social_app/AddFriend.html", {
+                'error': "User is already added"
+            })
+        elif name_p == selected_profile.name:
+            return render(request, "social_app/AddFriend.html", {
+                'error': "User you are trying to add is yourself"
+            })
+        else:
+            Dashboard_User.Friends.append(name_p)
+            Dashboard_User.save()
+            return render(request, "social_app/Dashboard.html", {
             'name' : selected_profile.name,
             'Friends' : Dashboard_User.Friends,
             'Workouts': Dashboard_User.Workout,
-            'Progress' : Progress_Num,
-            'length' : len(Dashboard_User.Workout),
         })
 
 def FriendPage(request, email, name):
