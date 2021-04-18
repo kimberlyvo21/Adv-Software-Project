@@ -94,15 +94,16 @@
             <div class="card-header">
               <h5>Progress </h5>
             </div>
-            {%for prog in Progress%}
+            {%for prog in Progress%} {% for work in Workouts%}
             <ul class="list-group list-group-flush">
+            <p> {{work}} </p>
               <li class="list-group-item">
                 <div class="progress" style="height: 25px;">
-                  <div class="progress-bar" role="progressbar" style="width: {{ prog }}%;"  aria-valuenow={{prog}} aria-valuemin="0" aria-valuemax="100"> {{prog}}</div>
+                  <div class="progress-bar" role="progressbar" style="width: {{ prog }}%;"  aria-valuenow={{prog}} aria-valuemin="0" aria-valuemax="100"> {{ work }}</div>
                 </div>
               </li>
             </ul>
-            {%endfor%}
+            {%endfor%} {%endfor%}
           </div>
         </div>
 
