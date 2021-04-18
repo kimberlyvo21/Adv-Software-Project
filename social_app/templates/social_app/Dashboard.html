@@ -65,28 +65,28 @@
     </div>-->
     <br>
     <div class="row">
-      <div class="col-7">
-        <div class="card border-0">
-          <div class="card blog-shadow-dreamy border-0">
+
+
+      <div class="col-7">       
+          <div class="card blog-shadow-dreamy">
             <div class = "m-4">
-              <h4>Workouts</h4>
-            <div class = "ml-3 p-2">
-            {%for work in Workouts%}
-            <ul class="list-group list-group-flush">
-            <div class="alert alert-light" style="text-align:center" role="alert">
-              <li class="list-group-item" href="{% url 'social_app:profile' user.email %}">{{work}}
+                <h4>Workouts</h4>
+              <div class = "ml-3 p-2">
+                {%for work in Workouts%}
+                <ul class="list-group list-group-flush">
+                <div class="alert alert-light" style="text-align:center" role="alert">
+                  <li class="list-group-item" href="{% url 'social_app:profile' user.email %}">{{work}}
+                </div>
+                  </li>
+                </ul>
+                {% endfor %}
+              </div>
             </div>
-              </li>
-            </ul>
-            {% endfor %}
-            </div>
-            </div>
-            <div class="center">
-              <a href="{% url 'social_app:AddWorkout' user.email %}" class="btn btn-primary">Add A Workout to list</a>
-              <a href="{% url 'social_app:UpdateWorkout' user.email %}" class="btn btn-primary">Update Workout
-                Progress</a>
-            </div>
-          </div>
+            <div class = "m-3">
+              <a style="float: right" href="{% url 'social_app:AddWorkout' user.email %}" class="btn btn-primary m-2">Add A Workout to list</a>
+              <a style="float: right" href="{% url 'social_app:UpdateWorkout' user.email %}" class="btn btn-outline-primary m-2">Update Workout
+                Progress</a>   
+            </div>      
         </div>
       </div>
 
@@ -94,7 +94,7 @@
 
       <div class="col-5">
         <div class="card border-0">
-          <div class="card blog-shadow-dreamy border-0">
+          <div class="card blog-shadow-dreamy">
             <div class="m-4">
               <h4>Progress </h4>
             <div class = "ml-3 p-2">
@@ -118,29 +118,31 @@
       Add Leaderboard (Ranking myself and friends by overall progress)
       Add Friends page that shows overall progress of each friend
     -->
-      <div class="card mt-4 blog-shadow-dreamy border-0">
-        <div class="m-4">
-          <h4>Friends</h4>
-        <div class = "ml-3 p-2">
-        <ul class="list-group list-group-flush">
-           
-          {% for Fr in Friends %}
-          <div class="alert alert-light" style="text-align:center" role="alert">
-          <li class="list-group-item" href="">{{Fr}} </br>
-            <a href="{% url 'social_app:friendpage' user.email Fr %}">Look at {{Fr}}'s progress on Leaderboard </a>
-          </li>
+        <div class="card mt-4 blog-shadow-dreamy">
+          <div class="m-4">
+            <h4>Friends</h4>
+          <div class = "ml-3 p-2">
+          <ul class="list-group list-group-flush">
+            
+            {% for Fr in Friends %}
+            <div class="alert alert-light" style="text-align:center" role="alert">
+            <li class="list-group-item" href="">{{Fr}} </br>
+              <a href="{% url 'social_app:friendpage' user.email Fr %}">Look at {{Fr}}'s progress on Leaderboard </a>
+            </li>
+            </div>
+            {% endfor %}      
+          </ul>
+          </div>   
           </div>
-          {% endfor %}      
-        </ul>
-         </div>   
-        </div>
+          
+          <div class = "m-3">
+            <a style="float: right" href="{% url 'social_app:AddFriends' user.email %}" class="btn btn-primary">Add Friends</a>
         
-        <div class="center">
-          <a href="{% url 'social_app:AddFriends' user.email %}" class="btn btn-primary">Add Friends</a>
+          </div>
         </div>
-        
       </div>
-    </div>
+
+
       </div>
     </div>
 <!----->
