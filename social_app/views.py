@@ -230,10 +230,12 @@ def UpdateWorkout(request, email):
         })
     print(progress_w)
     Workouts_User.Workout_Progress[index] += int(progress_w)
+    if Workouts_User.Workout_Progress[index] >= Workouts_User.Workout_Goals[index]:
+        Workouts_User.Workout_Progress[index] = Workouts_User.Workout_Goals[index]
     Workouts_User.save()
     for num in Workouts_User.Workout_Progress:
         level_val = (num + level_val)
-    
+
     selected_profile.level = math.floor(level_val/100)
     selected_profile.save()
 
