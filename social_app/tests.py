@@ -128,6 +128,8 @@ class Friend(TestCase):
         
 class Level(TestCase):
     def test_LevelSame(self):
+        level_val = 0
+        level = 0
         new_user = create_account("James", 18, 6, 60, "James@gmail.com")
         new_workout = Workouts(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
                                Workout_Goals=[60])
@@ -139,6 +141,8 @@ class Level(TestCase):
         self.assertEqual(level, 0)
 
     def test_LevelNext(self):
+        level_val = 0
+        level = 0
         new_user = create_account("James", 18, 6, 60, "James@gmail.com")
         new_workout = Workouts(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
                                Workout_Goals=[100])
