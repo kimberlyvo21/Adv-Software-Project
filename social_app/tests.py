@@ -50,11 +50,16 @@ class WorkOut(TestCase):
         new_workout.Workout_Progress[index] += int(20)
         self.assertEqual(new_workout.Workout_Progress[index], 20)
 
-    # def WorkOutCompletion(self):
-    #     new_user = create_account("James", 18, 6, 60, "James@gmail.com")
-    #     Workouts.objects.create(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
-    #                             Workout_Goals=[60])
-    #     pass
+    def test_WorkOutCompletion(self):
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_workout = Workouts.objects.create(User=User.objects.get(username="James"), Workout_Name=["PushUps"],
+                                              Workout_Progress=[0],
+                                              Workout_Goals=[60])
+        index = new_workout.Workout_Name.index("PushUps")
+        new_workout.Workout_Progress[index] += int(70)
+        if new_workout.Workout_Progress[index] >= new_workout.Workout_Goals[index]:
+            new_workout.Workout_Progress[index] = new_workout.Workout_Goals[index]
+        self.assertEqual(new_workout.Workout_Progress[index], 60)
 
 
 class Friend(TestCase):
