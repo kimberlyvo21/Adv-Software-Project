@@ -51,7 +51,7 @@
   <div class="container mt-4">
 
 
-    <h3>Welcome to your Dashboard page {{name}}</h3>
+    <h3>Welcome to your Dashboard, {{name}}</h3>
     <p>Track your personal progress and improvements! </p>
   </div>
   <div class="col-lg">
@@ -68,13 +68,13 @@
 
 
       <div class="col-7">       
-          <div class="card blog-shadow-dreamy">
+          <div class="card">
             <div class = "m-4">
                 <h4>Workouts</h4>
-              <div class = "ml-3 p-2">
+              <div class = "ml-3 p-1">
                 {%for work in Workouts%}
                 <ul class="list-group list-group-flush">
-                <div class="alert alert-light" style="text-align:center" role="alert">
+                <div style = "box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px; text-align:center;">
                   <li class="list-group-item" href="{% url 'social_app:profile' user.email %}">{{work}}
                 </div>
                   </li>
@@ -94,10 +94,10 @@
 
       <div class="col-5">
         <div class="card border-0">
-          <div class="card blog-shadow-dreamy">
+          <div class="card">
             <div class="m-4">
               <h4>Progress </h4>
-            <div class = "ml-3 p-2">
+            <div class = "ml-3 p-1">
             {%for prog in Progress%}
             <ul class="list-group list-group-flush">
             <p> {{work}} </p>
@@ -119,14 +119,14 @@
       Add Leaderboard (Ranking myself and friends by overall progress)
       Add Friends page that shows overall progress of each friend
     -->
-        <div class="card mt-4 blog-shadow-dreamy">
+        <div class="card mt-4">
           <div class="m-4">
             <h4>Friends</h4>
-          <div class = "ml-3 p-2">
+          <div class = "ml-3 p-1">
           <ul class="list-group list-group-flush">
             
             {% for Fr in Friends %}
-            <div class="alert alert-light" style="text-align:center" role="alert">
+            <div style ="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px; text-align:center;">
             <li class="list-group-item" href="">{{Fr}} </br>
               <a href="{% url 'social_app:friendpage' user.email Fr %}">Look at {{Fr}}'s progress on Leaderboard </a>
             </li>
