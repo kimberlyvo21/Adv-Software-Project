@@ -95,7 +95,7 @@ class Friend(TestCase):
         new_user2 = create_account("John", 1, 1, 1, "John@gmail.com")
         Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=["John"], Workout=[])
         try:
-            Profile.objects.get(email="John@gmail.com")
+            #Profile.objects.get(email="John@gmail.com")
             if "John" not in Dashboard_User.Friends:
                 Dashboard_User.Friends.append("John")
             else:
@@ -113,8 +113,9 @@ class Friend(TestCase):
         Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=[], Workout=[])
         selected_profile = Profile.objects.get(email="James@gmail.com")
         try:
-            Profile.objects.get(email="James@gmail.com")
-            if selected_profile.name == "James":
+            #Profile.objects.get(email="James@gmail.com")
+            print(Dashboard_User.User)
+            if Dashboard_User.User == "James":
                 print("You can't add yourself")
             else:
                 Dashboard_User.Friends.append("James")
