@@ -74,7 +74,7 @@
               <div class = "ml-3 p-1">
                 {%for work in Workouts%}
                 <ul class="list-group list-group-flush">
-                <div style = "box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px; text-align:center;">
+                <div class = "mb-1" style = "box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px; text-align:center;">
                   <li class="list-group-item" href="{% url 'social_app:profile' user.email %}">{{work}}
                 </div>
                   </li>
@@ -133,7 +133,7 @@
           <ul class="list-group list-group-flush">
             
             {% for Fr in Friends %}
-            <div style ="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px; text-align:center;">
+            <div class = "mb-1" style ="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px; text-align:center;">
             <li class="list-group-item" href="">{{Fr}} </br>
               <a href="{% url 'social_app:friendpage' user.email Fr %}">Look at {{Fr}}'s progress on Leaderboard </a>
             </li>
