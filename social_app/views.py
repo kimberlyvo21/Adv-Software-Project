@@ -157,12 +157,21 @@ def AddFriends(request, email):
 def FriendPage(request, email):
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
     friends_level = []
+    friends_likes = []
+    if request.method == 'POST':
+        if 'like' in request.POST:
+            if request.POST['like'] == 'click':
+                selected_profile = Profile.objects.get(name = request.POST.get('name'))
+                selected_profile.ThumbsUp += 1
+                selected_profile.save()
     for friend in Dashboard_User.Friends: 
         selected_profile = Profile.objects.get(name = friend)
         friends_level.append(selected_profile.level)
+        friends_likes.append(selected_profile.ThumbsUp)
     return render(request, "social_app/FriendPage.html", {
             'name_f' : Dashboard_User.Friends,
             'level_f' : friends_level,
+            'likes_f' : friends_likes,
             })
 
 def AddWorkout(request, email):
