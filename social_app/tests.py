@@ -124,3 +124,27 @@ class Friend(TestCase):
         friends = Dashboard_User.Friends
         self.assertEqual(userExists, True)
         self.assertEqual(friends, [])
+        
+        
+class Level(TestCase):
+    def test_LevelSame(self):
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_workout = Workouts(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
+                               Workout_Goals=[60])
+        index = new_workout.Workout_Name.index("PushUps")
+        new_workout.Workout_Progress[index] += int(20)
+        for num in new_workout.Workout_Progress:
+            level_val = (num + level_val)
+        level = math.floor(level_val / 100)
+        self.assertEqual(level, 0)
+
+    def test_LevelNext(self):
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_workout = Workouts(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
+                               Workout_Goals=[100])
+        index = new_workout.Workout_Name.index("PushUps")
+        new_workout.Workout_Progress[index] += int(100)
+        for num in new_workout.Workout_Progress:
+            level_val = (num + level_val)
+        level = math.floor(level_val / 100)
+        self.assertEqual(level, 1)
