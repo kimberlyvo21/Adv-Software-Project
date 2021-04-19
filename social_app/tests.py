@@ -89,12 +89,37 @@ class Friend(TestCase):
         self.assertEqual(userExists, False)
         self.assertEqual(friends, [])
 
-    def FriendAlready(self):
-        new_user = create_account("James", 18, 6, 60)
+    def test_FriendAlready(self):
+        userExists = True
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_user2 = create_account("John", 1, 1, 1, "John@gmail.com")
+        Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=["John"], Workout=[])
+        try:
+            Profile.objects.get(email="John@gmail.com")
+            if "John" not in Dashboard_User.Friends:
+                Dashboard_User.Friends.append("John")
+            else:
+                print("John already added")
+        except Profile.DoesNotExist:
+            userExists = False
+        friends = Dashboard_User.Friends
+        self.assertEqual(userExists, True)
+        self.assertEqual(friends, ["John"])
 
-        pass
-
-    def FriendSelf(self):
-        new_user = create_account("James", 18, 6, 60)
-
-        pass
+    def test_FriendSelf(self):
+        userExists = True
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_user2 = create_account("John", 1, 1, 1, "John@gmail.com")
+        Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=[], Workout=[])
+        selected_profile = Profile.objects.get(email="James@gmail.com")
+        try:
+            Profile.objects.get(email="James@gmail.com")
+            if selected_profile.name == "James":
+                print("You can't add yourself")
+            else:
+                Dashboard_User.Friends.append("James")
+        except Profile.DoesNotExist:
+            userExists = False
+        friends = Dashboard_User.Friends
+        self.assertEqual(userExists, True)
+        self.assertEqual(friends, [])
