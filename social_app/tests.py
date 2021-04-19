@@ -5,13 +5,11 @@ from django.contrib.auth.models import User
 
 # Create your tests here.
 
-
-def create_account(username, age, height, workout_time, email):
+def create_account(username, age, height, level, email):
     User.objects.create_user(username=username, email=email)
     return Profile.objects.create(User=User.objects.get(username=username), name="John Doe", age=age, height=height,
-                                  time=workout_time,
+                                  level=level,
                                   email="John@gmail.com")
-
 
 class ProfileCreation(TestCase):
     def test_case_profile_accept(self):
