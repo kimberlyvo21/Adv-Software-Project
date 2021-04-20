@@ -31,7 +31,7 @@
           <a class="nav-link" href="{% url 'social_app:dashboard' user.email %}">Dashboard</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'social_app:profile' user.email %}">Leaderboard<span
+          <a class="nav-link" href="{% url 'social_app:leaderboard' user.email %}">Leaderboard<span
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
@@ -51,7 +51,7 @@
   <div class="container mt-4">
 
 
-    <h3>Welcome to your Dashboard page {{name}}</h3>
+    <h3>Welcome to your Dashboard, {{name}}</h3>
     <p>Track your personal progress and improvements! </p>
   </div>
   <div class="col-lg">
@@ -119,22 +119,15 @@
       Add Leaderboard (Ranking myself and friends by overall progress)
       Add Friends page that shows overall progress of each friend
     -->
-        <div class="card mt-4 blog-shadow-dreamy">
-          <div class="m-4">
-            <h4>Friends</h4>
-          <div class = "ml-3 p-2">
-          <ul class="list-group list-group-flush">
-            
-            {% for Fr in Friends %}
-            <div class="alert alert-light" style="text-align:center" role="alert">
-            <li class="list-group-item" href="">{{Fr}} </br>
-              <a href="{% url 'social_app:friendpage' user.email Fr %}">Look at {{Fr}}'s progress on Leaderboard </a>
-            </li>
-            </div>
-            {% endfor %}      
-          </ul>
-          </div>   
-          </div>
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5>Friends</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for Fr in Friends %}
+          <li class="list-group-item" href="">{{Fr}}
+          </li>
+          {% endfor %}
           
           <div class = "m-3">
             <a style="float: right" href="{% url 'social_app:AddFriends' user.email %}" class="btn btn-primary">Add Friends</a>
@@ -161,7 +154,6 @@
         <ul class="list-group list-group-flush">
           {% for Fr in Friends %}
           <li class="list-group-item" href="">{{Fr}}
-            <a href="{% url 'social_app:friendpage' user.email Fr %}" class="btn btn-primary">Go to {{Fr}}'s Page' </a>
           </li>
           {% endfor %}
         </ul>

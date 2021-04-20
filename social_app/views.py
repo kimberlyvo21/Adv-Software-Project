@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 import requests
 from isodate import parse_duration
 from django.conf import settings
+import math
 
 
 
@@ -26,8 +27,7 @@ def ProfilePage(request, email):
             name_p = request.POST.get('name').lower()
             age_p = request.POST.get('age')
             height_p = request.POST.get('height')
-            time_p = request.POST.get('time')
-            profile_idea = Profile(User = User.objects.get(email=email), name=name_p, age=age_p, height=height_p, time=time_p, email=email)
+            profile_idea = Profile(User = User.objects.get(email=email), name=name_p, age=age_p, height=height_p, level=0, email=email)
             Dashboard_User = Dashboard(User = User.objects.get(email=email), Friends=[], Workout=[])
             Workouts_User = Workouts(User = User.objects.get(email=email), Workout_Name=[], Workout_Progress=[], Workout_Goals=[])
             profile_idea.save()
@@ -37,13 +37,13 @@ def ProfilePage(request, email):
                 'name': name_p,
                 'age': age_p,
                 'height' : height_p,
-                'time' : time_p,
+                'level' : 0,
             })
     return render(request, "social_app/profile.html", {
                     'name': selected_profile.name,
                     'age': selected_profile.age,
                     'height' : selected_profile.height,
-                    'time' : selected_profile.time,
+                    'level' : selected_profile.level,
                 })
 
 def DashboardPage(request, email):
@@ -155,11 +155,24 @@ def AddFriends(request, email):
             'Workouts': Dashboard_User.Workout,
         })
 
-def FriendPage(request, email, name):
-    friend_profile = Profile.objects.get(name=name)
+def FriendPage(request, email):
+    Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
+    friends_level = []
+    friends_likes = []
+    if request.method == 'POST':
+        if 'like' in request.POST:
+            if request.POST['like'] == 'click':
+                selected_profile = Profile.objects.get(name = request.POST.get('name'))
+                selected_profile.ThumbsUp += 1
+                selected_profile.save()
+    for friend in Dashboard_User.Friends: 
+        selected_profile = Profile.objects.get(name = friend)
+        friends_level.append(selected_profile.level)
+        friends_likes.append(selected_profile.ThumbsUp)
     return render(request, "social_app/FriendPage.html", {
-            'name_f' : friend_profile.name,
-            'time_f' : friend_profile.time,
+            'name_f' : Dashboard_User.Friends,
+            'level_f' : friends_level,
+            'likes_f' : friends_likes,
             })
 
 def AddWorkout(request, email):
@@ -204,6 +217,7 @@ def UpdateWorkout(request, email):
     selected_profile = Profile.objects.get(email=email)
     name_w = ""
     progress_w = 0
+    level_val = 0
     if request.method == 'GET':
         return render(request, "social_app/UpdateWorkout.html")
     if request.method == 'POST':
@@ -217,7 +231,15 @@ def UpdateWorkout(request, email):
         })
     print(progress_w)
     Workouts_User.Workout_Progress[index] += int(progress_w)
+    if Workouts_User.Workout_Progress[index] >= Workouts_User.Workout_Goals[index]:
+        Workouts_User.Workout_Progress[index] = Workouts_User.Workout_Goals[index]
     Workouts_User.save()
+    for num in Workouts_User.Workout_Progress:
+        level_val = (num + level_val)
+
+    selected_profile.level = math.floor(level_val/100)
+    selected_profile.save()
+
     Progress_Num = []
     for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
         Progress_Num.append((Prog/Goals)*100)

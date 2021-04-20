@@ -1,17 +1,16 @@
 from django.test import TestCase
 from .models import Profile, Workouts, Dashboard
 from django.contrib.auth.models import User
+import math
 
 
 # Create your tests here.
 
-
-def create_account(username, age, height, workout_time, email):
+def create_account(username, age, height, level, email):
     User.objects.create_user(username=username, email=email)
     return Profile.objects.create(User=User.objects.get(username=username), name="John Doe", age=age, height=height,
-                                  time=workout_time,
+                                  level=level,
                                   email="John@gmail.com")
-
 
 class ProfileCreation(TestCase):
     def test_case_profile_accept(self):
@@ -52,11 +51,16 @@ class WorkOut(TestCase):
         new_workout.Workout_Progress[index] += int(20)
         self.assertEqual(new_workout.Workout_Progress[index], 20)
 
-    # def WorkOutCompletion(self):
-    #     new_user = create_account("James", 18, 6, 60, "James@gmail.com")
-    #     Workouts.objects.create(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
-    #                             Workout_Goals=[60])
-    #     pass
+    def test_WorkOutCompletion(self):
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_workout = Workouts.objects.create(User=User.objects.get(username="James"), Workout_Name=["PushUps"],
+                                              Workout_Progress=[0],
+                                              Workout_Goals=[60])
+        index = new_workout.Workout_Name.index("PushUps")
+        new_workout.Workout_Progress[index] += int(70)
+        if new_workout.Workout_Progress[index] >= new_workout.Workout_Goals[index]:
+            new_workout.Workout_Progress[index] = new_workout.Workout_Goals[index]
+        self.assertEqual(new_workout.Workout_Progress[index], 60)
 
 
 class Friend(TestCase):
@@ -86,12 +90,62 @@ class Friend(TestCase):
         self.assertEqual(userExists, False)
         self.assertEqual(friends, [])
 
-    def FriendAlready(self):
-        new_user = create_account("James", 18, 6, 60)
+    def test_FriendAlready(self):
+        userExists = True
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_user2 = create_account("John", 1, 1, 1, "John@gmail.com")
+        Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=["John"], Workout=[])
+        try:
+            #Profile.objects.get(email="John@gmail.com")
+            if "John" not in Dashboard_User.Friends:
+                Dashboard_User.Friends.append("John")
+            else:
+                print("John already added")
+        except Profile.DoesNotExist:
+            userExists = False
+        friends = Dashboard_User.Friends
+        self.assertEqual(userExists, True)
+        self.assertEqual(friends, ["John"])
 
-        pass
+    def test_FriendSelf(self):
+        userExists = True
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=[], Workout=[])
+        try:
+            if Dashboard_User.User.username == "James":
+                print("You can't add yourself")
+            else:
+                Dashboard_User.Friends.append("James")
+        except Profile.DoesNotExist:
+            userExists = False
+        friends = Dashboard_User.Friends
+        self.assertEqual(userExists, True)
+        self.assertEqual(friends, [])
+        
+        
+class Level(TestCase):
+    def test_LevelSame(self):
+        level_val = 0
+        level = 0
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_workout = Workouts(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
+                               Workout_Goals=[60])
+        index = new_workout.Workout_Name.index("PushUps")
+        new_workout.Workout_Progress[index] += int(20)
+        for num in new_workout.Workout_Progress:
+            level_val = (num + level_val)
+        level = math.floor(level_val / 100)
+        self.assertEqual(level, 0)
 
-    def FriendSelf(self):
-        new_user = create_account("James", 18, 6, 60)
-
-        pass
+    def test_LevelNext(self):
+        level_val = 0
+        level = 0
+        new_user = create_account("James", 18, 6, 60, "James@gmail.com")
+        new_workout = Workouts(User=User.objects.get(username="James"), Workout_Name=["PushUps"], Workout_Progress=[0],
+                               Workout_Goals=[100])
+        index = new_workout.Workout_Name.index("PushUps")
+        new_workout.Workout_Progress[index] += int(100)
+        for num in new_workout.Workout_Progress:
+            level_val = (num + level_val)
+        level = math.floor(level_val / 100)
+        self.assertEqual(level, 1)
