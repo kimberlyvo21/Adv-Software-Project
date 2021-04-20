@@ -43,7 +43,7 @@
 <body>
   <div class="container">
 
-    <div class="card ">
+    <div class="card">
       <h1 class="card-header" style="text-align:center">Welcome to your profile page, {{name}}!</h1>
       <div class="text-center">
       <div class="center">
@@ -52,24 +52,28 @@
             src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg">
           <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
         </div>
-         <div class = " card row">
-         <h3> Awards!</h3>
+        <br/>
+        <h3> Awards!</h3>
+         <div class = "row p-2">
+         <div class = "p-4">
         {% if level < 5%}
-        <img style="width: 200px; height: auto; object-fit: cover;border-radius: 50%;"
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
         src="{% static "images/B.png" %}">
         {% endif %}
         {% if 5 <= level and level < 10%}
-        <img style="width: 200px; height: auto; object-fit: cover;border-radius: 50%;"
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
         src="{% static "images/Silver.png" %}">
         {% endif %}
         {% if 10 <= level and level < 15%}
-        <img style="width: 200px; height: auto; object-fit: cover;border-radius: 50%;"
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
         src="{% static "images/G .png" %}">
         {% endif %}
         {% if 15 <= level %}
-        <img style="width: 200px; height: auto; object-fit: cover;border-radius: 50%;"
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
         src="{% static "images/D .png" %}">
         {% endif %}
+        </div>
+        </div>
        </div>
       </div>
     </div>
