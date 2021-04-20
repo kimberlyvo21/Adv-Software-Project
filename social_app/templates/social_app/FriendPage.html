@@ -72,16 +72,19 @@
         </div>
           {% endfor %}
         </div>
-        </div>
+        <div class = "col">
           <form method="POST">
           {% csrf_token %}
           {% for like in likes_f %} {% for fr in name_f %}
-          <input class="form-check-input" type="radio" name="like" id="like" value="click">
+          <div>
+          <input class="form-check-input" type="radio" name="like" id="like" value="click">  
           <label>{{like}}</label>
           <input type="submit" name="name" id="name" value="{{fr}}">
+          </div>
           {% endfor %} {% endfor %}
           </form>
-          
+          </div>
+         </div> 
       </div>
     
  
