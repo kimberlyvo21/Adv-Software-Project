@@ -111,10 +111,8 @@ class Friend(TestCase):
         userExists = True
         new_user = create_account("James", 18, 6, 60, "James@gmail.com")
         Dashboard_User = Dashboard(User=User.objects.get(email="James@gmail.com"), Friends=[], Workout=[])
-        selected_profile = Profile.objects.get(email="James@gmail.com")
         try:
-            print(Dashboard_User.User)
-            if selected_profile.name == "James":
+            if Dashboard_User.User.username == "James":
                 print("You can't add yourself")
             else:
                 Dashboard_User.Friends.append("James")
