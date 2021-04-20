@@ -1,4 +1,4 @@
-gtifrom django.test import TestCase
+from django.test import TestCase
 from .models import Profile, Workouts, Dashboard
 from django.contrib.auth.models import User
 import math
