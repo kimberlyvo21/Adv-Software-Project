@@ -159,6 +159,7 @@ def FriendPage(request, email):
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
     friends_level = []
     friends_likes = []
+    friends = []
     if request.method == 'POST':
         if 'like' in request.POST:
             if request.POST['like'] == 'click':
@@ -168,9 +169,12 @@ def FriendPage(request, email):
     for friend in Dashboard_User.Friends: 
         selected_profile = Profile.objects.get(name = friend)
         friends_level.append(selected_profile.level)
-        friends_likes.append(selected_profile.ThumbsUp)
+        friends_level.sort(reverse=True)
+        friends.insert(friends_level.index(selected_profile.level), friend)
+        friends_likes.insert(friends_level.index(selected_profile.level), selected_profile.ThumbsUp)
+
     return render(request, "social_app/FriendPage.html", {
-            'name_f' : Dashboard_User.Friends,
+            'name_f' : friends,
             'level_f' : friends_level,
             'likes_f' : friends_likes,
             })
