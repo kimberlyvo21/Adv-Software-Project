@@ -61,13 +61,13 @@
               <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
             </div>
           </div>
-          {% for fr in name_f %}
+          {% for fr in name_f %}{% for like in likes_f %}
           <div class="col-9" style="text-align: left;">
             <div class="friend-card mt-4">
               <h4>{{fr}}</h4>        
           </div>
         </div>
-          {% endfor %}
+          {% endfor %}{% endfor %}
           {% for lvl in level_f %}
           <div class="col-9" style="text-align: left;">
             <div class="friend-card mt-4">
@@ -77,11 +77,11 @@
           {% endfor %}
           <form method="POST">
           {% csrf_token %}
-          {% for like in likes_f %} {% for fr in name_f %}
+           {% for fr in name_f %}
           <input class="form-check-input" type="radio" name="like" id="like" value="click">
           <label>{{like}}</label>
           <input type="submit" name="name" id="name" value="{{fr}}">
-          {% endfor %} {% endfor %}
+          {% endfor %} 
           </form>
       </div>
     </div>

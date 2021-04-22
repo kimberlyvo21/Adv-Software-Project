@@ -63,6 +63,7 @@ def DashboardPage(request, email):
     })
 
 def WorkoutPage(request, email):
+    #Try to see if you can watch the youtube video in browser
     Workouts_User = Workouts.objects.get(User = User.objects.get(email=email))
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
     selected_profile = Profile.objects.get(email=email)
