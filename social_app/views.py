@@ -51,15 +51,20 @@ def DashboardPage(request, email):
     selected_profile = Profile.objects.get(email=email)
     Workouts_User = Workouts.objects.get(User = User.objects.get(email=email))
     Progress_Num = []
+    Name_Prog = []
     for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
         Progress_Num.append((Prog/Goals)*100)
     }
+    for Prog, Name in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Name): 
+        Name_Prog.append([Name, Prog])
+    print(Name_Prog)
     return render(request, "social_app/Dashboard.html", {
         'name' : selected_profile.name,
         'Friends' : Dashboard_User.Friends,
         'Workouts': Dashboard_User.Workout,
         'Progress' : Progress_Num,
         'length' : len(Dashboard_User.Workout),
+        'NameOfProg' : Name_Prog
     })
 
 def WorkoutPage(request, email):
