@@ -39,6 +39,9 @@
           <a class="nav-link" href="{% url 'social_app:workout' user.email %}">Workouts <span class="sr-only">(current)</span></a>
         </li>
     </ul>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary" href="{% url 'account_logout' %}" role="button">Logout</a>
+    </div>
       </nav>
 </head>
 
@@ -50,22 +53,6 @@
 
 
 <!---Friend card element, can loop through all friends in friend list to display all friend using this template as a base-->
-<<<<<<< HEAD
-
-    <div class="col-lg">
-      <div class="card p-3 m-2">
-        <div class="row">
-          <div class="col-3">
-            <div class="center">
-              <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
-                src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg">
-              <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
-            </div>
-          </div>
-          {% for fr in name_f %}{% for like in likes_f %}
-          <div class="col-9" style="text-align: left;">
-            <div class="friend-card mt-4">
-=======
   
    
     <div class="card p-3 m-2">
@@ -74,18 +61,12 @@
           {% for fr in name_f %}
           <div class = "card" style="text-align: left;">
             <div class="m-1 p-1">
->>>>>>> c54d360af895d1b86bf3ec45a57f958b91ac846d
               <h4>{{fr}}</h4>        
             </div>
           </div>
-<<<<<<< HEAD
-        </div>
-          {% endfor %}{% endfor %}
-=======
           {% endfor %}
           </div>
           <div class = "col">
->>>>>>> c54d360af895d1b86bf3ec45a57f958b91ac846d
           {% for lvl in level_f %}
           <div class="card" style="text-align: left;">
             <div class="m-1 p-1">
@@ -94,24 +75,25 @@
         </div>
           {% endfor %}
         </div>
+          <div class = "col">
+          {% for likes in likes_f %}
+          <div class="card" style="text-align: left;">
+            <div class="m-1 p-1">
+              <h4>Likes: {{likes}}. </h4>       
+          </div>
+        </div>
+          {% endfor %}
+        </div>
         <div class = "col">
           <form method="POST">
           {% csrf_token %}
-<<<<<<< HEAD
-           {% for fr in name_f %}
-          <input class="form-check-input" type="radio" name="like" id="like" value="click">
-          <label>{{like}}</label>
-          <input type="submit" name="name" id="name" value="{{fr}}">
-          {% endfor %} 
-=======
-          {% for like in likes_f %} {% for fr in name_f %}
+          {% for fr in name_f %}
           <div>
           <input class="form-check-input" type="radio" name="like" id="like" value="click">  
           <label>{{like}}</label>
           <input type="submit" name="name" id="name" value="{{fr}}">
           </div>
-          {% endfor %} {% endfor %}
->>>>>>> c54d360af895d1b86bf3ec45a57f958b91ac846d
+          {% endfor %}
           </form>
           </div>
          </div> 
