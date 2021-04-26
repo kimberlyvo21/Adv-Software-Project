@@ -57,7 +57,6 @@ def DashboardPage(request, email):
     }
     for Prog, Name in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Name): 
         Name_Prog.append([Name, Prog])
-    print(Name_Prog)
     return render(request, "social_app/Dashboard.html", {
         'name' : selected_profile.name,
         'Friends' : Dashboard_User.Friends,
@@ -153,13 +152,17 @@ def AddFriends(request, email):
                 'error': "User you are trying to add is yourself"
             })
         else:
-            Dashboard_User.Friends.append(name_p)
-            Dashboard_User.save()
+            Progress_Num = []
+            for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
+                Progress_Num.append((Prog/Goals)*100)
+            }
             return render(request, "social_app/Dashboard.html", {
-            'name' : selected_profile.name,
-            'Friends' : Dashboard_User.Friends,
-            'Workouts': Dashboard_User.Workout,
-        })
+                'name' : selected_profile.name,
+                'Friends' : Dashboard_User.Friends,
+                'Workouts': Dashboard_User.Workout,
+                'Progress' : Progress_Num,
+                'length' : len(Dashboard_User.Workout),
+            })
 
 def FriendPage(request, email):
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
