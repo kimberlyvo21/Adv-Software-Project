@@ -27,17 +27,23 @@ def ProfilePage(request, email):
             name_p = request.POST.get('name').lower()
             age_p = request.POST.get('age')
             height_p = request.POST.get('height')
-            profile_idea = Profile(User = User.objects.get(email=email), name=name_p, age=age_p, height=height_p, level=0, email=email)
-            Dashboard_User = Dashboard(User = User.objects.get(email=email), Friends=[], Workout=[])
-            Workouts_User = Workouts(User = User.objects.get(email=email), Workout_Name=[], Workout_Progress=[], Workout_Goals=[])
-            profile_idea.save()
-            Dashboard_User.save()
-            Workouts_User.save()
-            return render(request, "social_app/profile.html", {
-                'name': name_p,
-                'age': age_p,
-                'height' : height_p,
-                'level' : 0,
+            try:
+                Profile.objects.get(name=name_p)
+            except(Profile.DoesNotExist):
+                profile_idea = Profile(User = User.objects.get(email=email), name=name_p, age=age_p, height=height_p, level=0, email=email)
+                Dashboard_User = Dashboard(User = User.objects.get(email=email), Friends=[], Workout=[])
+                Workouts_User = Workouts(User = User.objects.get(email=email), Workout_Name=[], Workout_Progress=[], Workout_Goals=[])
+                profile_idea.save()
+                Dashboard_User.save()
+                Workouts_User.save()
+                return render(request, "social_app/profile.html", {
+                    'name': name_p,
+                    'age': age_p,
+                    'height' : height_p,
+                    'level' : 0,
+                })
+            return render(request, 'social_app/signup.html', {
+                'error' : "The username is taken"
             })
     return render(request, "social_app/profile.html", {
                     'name': selected_profile.name,
@@ -80,6 +86,7 @@ def WorkoutPage(request, email):
             'q' : request.POST['search'],
             'key' :  settings.YOUTUBE_DATA_API_KEY,
             'maxResults' : 3,
+            'type' : 'video'
         }
 
         video_ids = []
@@ -87,11 +94,8 @@ def WorkoutPage(request, email):
         results = r.json()['items']
 
         for result in results:
-            print(result)
             video_ids.append(result['id']['videoId'])
 
-        if request.POST['submit'] == 'lucky':
-            return redirect(f'https://www.youtube.com/watch?v={ video_ids[0] }')
 
         video_params = {
             'key' : settings.YOUTUBE_DATA_API_KEY,
