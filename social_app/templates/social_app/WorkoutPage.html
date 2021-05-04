@@ -113,8 +113,9 @@
       </ul>
       {% endfor %}
       <div class="card-body">
+        <a href="{% url 'social_app:UpdateWorkout' user.email %}" class="btn btn-outline-primary">Update Workout Progress</a>
         <a href="{% url 'social_app:AddWorkout' user.email %}" class="btn btn-primary">Add A Workout to list</a>
-        <a href="{% url 'social_app:UpdateWorkout' user.email %}" class="btn btn-primary">Update Workout Progress</a>
+        
       </div>
     </div>
   </div>
