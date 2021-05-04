@@ -55,7 +55,7 @@ def ProfilePage(request, email):
                     'name': selected_profile.name,
                     'age': selected_profile.age,
                     'height' : selected_profile.height,
-                    'level' : selected_profile.level,
+                    'level' : math.floor(selected_profile.level/100),
                 })
 
 def DashboardPage(request, email):
@@ -67,7 +67,7 @@ def DashboardPage(request, email):
     for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
         Progress_Num.append((Prog/Goals)*100)
     }
-    for Prog, Name in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Name): 
+    for Prog, Name in zip(Progress_Num, Workouts_User.Workout_Name): 
         Name_Prog.append([Name, Prog])
     return render(request, "social_app/Dashboard.html", {
         'name' : selected_profile.name,
@@ -164,15 +164,19 @@ def AddFriends(request, email):
         Dashboard_User.Friends.append(name_p)
         Dashboard_User.save()
         Progress_Num = []
+        Name_Prog = []
         for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
             Progress_Num.append((Prog/Goals)*100)
         }
+        for Prog, Name in zip(Progress_Num, Workouts_User.Workout_Name): 
+            Name_Prog.append([Name, Prog])
         return render(request, "social_app/Dashboard.html", {
             'name' : selected_profile.name,
             'Friends' : Dashboard_User.Friends,
             'Workouts': Dashboard_User.Workout,
             'Progress' : Progress_Num,
             'length' : len(Dashboard_User.Workout),
+            'NameOfProg' : Name_Prog
         })
 
 def FriendPage(request, email):
@@ -188,10 +192,10 @@ def FriendPage(request, email):
                 selected_profile.save()
     for friend in Dashboard_User.Friends: 
         selected_profile = Profile.objects.get(name = friend)
-        friends_level.append(selected_profile.level)
+        friends_level.append(math.floor(selected_profile.level/100))
         friends_level.sort(reverse=True)
-        friends.insert(friends_level.index(selected_profile.level), friend)
-        friends_likes.insert(friends_level.index(selected_profile.level), selected_profile.ThumbsUp)
+        friends.insert(friends_level.index(math.floor(selected_profile.level/100)), friend)
+        friends_likes.insert(friends_level.index(math.floor(selected_profile.level/100)), selected_profile.ThumbsUp)
 
     return render(request, "social_app/FriendPage.html", {
             'name_f' : friends,
@@ -221,15 +225,19 @@ def AddWorkout(request, email):
             Dashboard_User.save()
             Workouts_User.save()
             Progress_Num = []
+            Name_Prog = []
             for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
                 Progress_Num.append((Prog/Goals)*100)
             }
+            for Prog, Name in zip(Progress_Num, Workouts_User.Workout_Name): 
+                Name_Prog.append([Name, Prog])
             return render(request, "social_app/Dashboard.html", {
                 'name' : selected_profile.name,
                 'Friends' : Dashboard_User.Friends,
                 'Workouts': Dashboard_User.Workout,
                 'Progress' : Progress_Num,
                 'length' : len(Dashboard_User.Workout),
+                'NameOfProg' : Name_Prog
             })
         return render(request, "social_app/AddWorkout.html", {
             'error' : "Sorry that workout was already created please make a new one",
@@ -253,25 +261,34 @@ def UpdateWorkout(request, email):
         return render(request, "social_app/UpdateWorkout.html", {
             'error' : "Sorry there is no such workout",
         })
-    print(progress_w)
     Workouts_User.Workout_Progress[index] += int(progress_w)
     if Workouts_User.Workout_Progress[index] >= Workouts_User.Workout_Goals[index]:
         Workouts_User.Workout_Progress[index] = Workouts_User.Workout_Goals[index]
+    if Workouts_User.Workout_Progress[index] == Workouts_User.Workout_Goals[index]:
+        selected_profile.level += Workouts_User.Workout_Goals[index]
+        Workouts_User.Workout_Goals.pop(index)
+        Workouts_User.Workout_Progress.pop(index)
+        Workouts_User.Workout_Name.pop(index)
+        Dashboard_User.Workout.pop(index)
+    else:
+        
+        print(selected_profile.level)
     Workouts_User.save()
-    for num in Workouts_User.Workout_Progress:
-        level_val = (num + level_val)
-
-    selected_profile.level = math.floor(level_val/100)
+    Dashboard_User.save()
     selected_profile.save()
 
     Progress_Num = []
+    Name_Prog = []
     for Prog, Goals in zip(Workouts_User.Workout_Progress, Workouts_User.Workout_Goals): {
         Progress_Num.append((Prog/Goals)*100)
     }
+    for Prog, Name in zip(Progress_Num, Workouts_User.Workout_Name): 
+        Name_Prog.append([Name, Prog])
     return render(request, "social_app/Dashboard.html", {
         'name' : selected_profile.name,
         'Friends' : Dashboard_User.Friends,
         'Workouts': Dashboard_User.Workout,
         'Progress' : Progress_Num,
         'length' : len(Dashboard_User.Workout),
+        'NameOfProg' : Name_Prog
     })
