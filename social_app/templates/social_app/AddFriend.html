@@ -38,7 +38,7 @@
     <div class="card p-5">
       <h2> Add Your Friend Here</h2>
       {% if error %}
-      <p><strong>{{ error }}</strong></p>
+      <p style="color:red;"><strong>{{ error }}</strong></p>
       {% endif %}
       <form method="post">
         {% csrf_token %}
