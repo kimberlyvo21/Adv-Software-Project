@@ -19,14 +19,20 @@ def ProfilePage(request, email):
     except(KeyError, User.DoesNotExist, Profile.DoesNotExist):
         name_p = ""
         age_p = ""
-        height_p = ""
-        time_p = ""
+        height_p = 0.0
+        heightft_p = 0
+        heightin_p = 0
         if request.method == 'GET':
             return render(request, 'social_app/signup.html')
         if request.method == 'POST':
             name_p = request.POST.get('name').lower()
             age_p = request.POST.get('age')
-            height_p = request.POST.get('height')
+            heightft_p = request.POST.get('heightfeet')
+            heightin_p = request.POST.get('heightinches')
+            if (int(heightin_p) > 9):
+                height_p = float(int(heightft_p) + (int(heightin_p)/100))
+            else:
+                height_p = float(int(heightft_p) + (int(heightin_p)/10))
             try:
                 Profile.objects.get(name=name_p)
             except(Profile.DoesNotExist):
