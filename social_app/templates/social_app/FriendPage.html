@@ -85,6 +85,9 @@
           {% endfor %}
         </div>
         <div class = "col">
+          <div class="alert alert-primary" role="alert">
+          <p><b>Liking system: </b>This column allows you to give a like to your friends to show them they are doing a great job! Click the radio button then the persons button labled with their name to have th elike counted.</p>
+          </div>
           <form method="POST">
           {% csrf_token %}
           {% for fr in name_f %}
