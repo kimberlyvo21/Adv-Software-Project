@@ -47,9 +47,12 @@
 
 <body>
   <div class="container mt-4">
-    <h3 style="text-align:center;">Leaderboard Page</h3>
-    <p style="text-align:center;">Work towards your goals as a community! See all of your friends progess and motivate them to keep going with a
-      little friendly competition :)</p>
+  <div class = "card mt-4" style="background-image: url('https://landerapp.com/blog/wp-content/uploads/2016/06/20160607-Click.gif'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+        <div class = "m-5" style = "background-color:rgba(255, 255, 255, 0.90)">
+        <h3 style="text-align:center;" class = "mt-3"> Leaderboard Page</h3>
+        <p class = "p-1" style="text-align:center;"> Work towards your goals as a community! See all of your friend's progess and motivate them with some friendly competition :) </p>
+        </div>
+        </div>
 
 
 <!---Friend card element, can loop through all friends in friend list to display all friend using this template as a base-->
@@ -59,7 +62,7 @@
       <div class = "row">
         <div class = "col">
           {% for fr in name_f %}
-          <div class = "card" style="text-align: left;">
+          <div class = "card mb-1" style="text-align: left;">
             <div class="m-1 p-1">
               <h4>{{fr}}</h4>        
             </div>
@@ -68,7 +71,7 @@
           </div>
           <div class = "col">
           {% for lvl in level_f %}
-          <div class="card" style="text-align: left;">
+          <div class="card mb-1" style="text-align: left;">
             <div class="m-1 p-1">
               <h4>Level: {{lvl}} </h4>       
           </div>
@@ -77,7 +80,7 @@
         </div>
           <div class = "col">
           {% for likes in likes_f %}
-          <div class="card" style="text-align: left;">
+          <div class="card mb-1" style="text-align: left;">
             <div class="m-1 p-1">
               <h4>Likes: {{likes}} </h4>       
           </div>
@@ -86,7 +89,7 @@
         </div>
         <div class = "col">
           <div class="alert alert-primary" role="alert">
-          <p><b>Liking system: </b>This column allows you to give a like to your friends to show them they are doing a great job! Click the radio button then the persons button labled with their name to have th elike counted.</p>
+          <p><b>Liking system: </b>This column allows you to give a like to your friends to show them they are doing a great job! Click the radio button then the person's button labled with their name to have the like counted.</p>
           </div>
           <form method="POST">
           {% csrf_token %}
