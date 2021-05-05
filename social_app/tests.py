@@ -224,6 +224,5 @@ class Leaderboard(TestCase):
 
     def test_AddingLike(self):
         new_user = create_account("James", 18, 6, 60, "James@gmail.com")
-        selected_profile = Profile.objects.get(email="James@gmail.com")
-        selected_profile.ThumbsUp += 1
-        self.assertEqual(selected_profile.ThumbsUp, 1)
+        new_user.ThumbsUp += 1
+        self.assertEqual(new_user.ThumbsUp, 1)
