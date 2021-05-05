@@ -1,3 +1,11 @@
+'''
+Documentation
+This file contains all the testing involved with the web application.
+- Sources
+- https://docs.djangoproject.com/en/3.2/intro/tutorial05/   -   How to do unit testing in django/python
+- https://docs.python.org/3/library/unittest.html   -   Different types of assert statements
+'''
+
 from django.test import TestCase
 from .models import Profile, Workouts, Dashboard
 from django.contrib.auth.models import User
