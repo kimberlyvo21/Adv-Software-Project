@@ -31,86 +31,63 @@
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
+          <a class="nav-link" href="{% url 'social_app:profile' user.email %}">Awards <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
           <a class="nav-link" href="{% url 'social_app:workout' user.email %}">Workouts <span class="sr-only">(current)</span></a>
         </li>
     </ul>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary" href="{% url 'account_logout' %}" role="button">Logout</a>
-    </div>
       </nav>
 </head>
 
-
-
-
 <body>
- 
-      <h3 class = "mt-4 pb-3" style="text-align:center">Welcome to your profile page, {{name}}!</h3>
+  <div class="container">
 
-      <div class = "row">
-
-        <div class = "col">
-          <div class = "card ml-4">
-            <h5 class="card-header" style="text-align:center">Basic Information</h5>
-            
-            <img class = "center" style="width: 250px; height: auto; object-fit: cover;border-radius: 50%; margin-left: auto; margin-right: auto;"
-                src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg">
-              <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
-            <div class = "p-4">
-              <h5 style="text-align:center"> <b>Your current age is: </b> {{age}} years old</h5>
-              <br>
-              <h5 style="text-align:center"> <b>Your current height is:</b> {{height}} ft</h5> 
-            </div>
-
-          </div>
+    <div class="card">
+      <h1 class="card-header" style="text-align:center">Welcome to your profile page, {{name}}!</h1>
+      <div class="text-center">
+      <div class="center">
+        <div class="row">
+          <img class = "center" style="width: 250px; height: auto; object-fit: cover;border-radius: 50%;"
+            src="https://st3.depositphotos.com/13159112/17145/v/600/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey.jpg">
+          <!---<img src="Profile_Pic.jfif" class="rounded mx-auto d-block" alt="Practice Profile Pic">-->
         </div>
-
-
-
-        <div class = "col">
-          <div class = "card mr-4">
-            <h5 class="card-header" style="text-align:center">Badges and Level</h5>
-            <div class="card p-3 m-3">
-              <h3 style="text-align:center">Current Level</h3>
-              <h5 style="text-align:center"><b>Level: </b> {{level}} </h5>
-            </div>
-            <center>
-              <div class = "pb-3" style="margin-left: auto; margin-right: auto;">
-                {% if level < 5%}
-                <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
-                src="{% static 'images/B.png' %}">
-                {% endif %}
-                {% if 5 <= level and level < 10%}
-                <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
-                src="{% static 'images/Silver.png' %}">
-                {% endif %}
-                {% if 10 <= level and level < 15%}
-                <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
-                src="{% static 'images/G .png' %}">
-                {% endif %}
-                {% if 15 <= level %}
-                <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
-                src="{% static 'images/D .png' %}">
-                {% endif %}
-              </div>
-            </center>
-             <div class="alert alert-primary m-3" role="alert">
-              <h5 class = "m-1" style="text-align:center">How are the badge and levels calculated?</h5>
-              <div class = "ml-4 mr-4 mt-2">
-              <p style="text-align:left"><b>Level: </b> Your level takes into account all the progress you have done on all of your workouts. 
-              It takes the total minutes you have worked out and converts that into a score.</p>
-              </div>
-               <div class = "ml-4 mr-4 mt-2">
-              <p style="text-align:left"><b>Badges: </b> There are 4 total badges you can obtain in this game, bronze, silver, gold, and diamond. 
-              You badge also corresponds with your level, the higher the level, the higher the badge you will recieve.</p>
-              </div>
-            </div>
-          </div>
+        <br/>
+        <h3> Awards!</h3>
+         <div class = "row p-2">
+         <div class = "p-4">
+        {% if level < 5%}
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
+        src="{% static "images/B.png" %}">
+        {% endif %}
+        {% if 5 <= level and level < 10%}
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
+        src="{% static "images/Silver.png" %}">
+        {% endif %}
+        {% if 10 <= level and level < 15%}
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
+        src="{% static "images/G .png" %}">
+        {% endif %}
+        {% if 15 <= level %}
+        <img style="width: 150px; height: auto; object-fit: cover;border-radius: 50%;"
+        src="{% static "images/D .png" %}">
+        {% endif %}
         </div>
-
+        </div>
+       </div>
       </div>
-      
-  
+    </div>
+      <br>
+      <h2 style="text-align:center"> Your current age is: {{age}} years old.</h2>
+      <br>
+      <h2 style="text-align:center"> Your current height is: {{height}} ft.</h2>
+      <br>
+
+      <div class="card p-3 m-3">
+        <h2 style="text-align:center">Current Level</h2>
+        <h5 style="text-align:center">Level: {{level}} </h5>
+      </div>
+  </div>
 </body>
 
-</html>
+</html>>

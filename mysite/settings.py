@@ -22,8 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '*x&_bk^k*(&kb4z6y^#6n=ioas9syc+d5h%^hoz39)vt)6q6z#'
-DEBUG = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+SECURE_SSL_REDIRECT = True
 ALLOWED_HOSTS = ["localhost", "0.0.0.0","127.0.0.1","a-09.herokuapp.com", "project-a-09.herokuapp.com"]
 
 
@@ -159,7 +161,6 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
