@@ -32,20 +32,20 @@
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'social_app:profile' user.email %}">Awards <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active">
           <a class="nav-link" href="{% url 'social_app:workout' user.email %}">Workouts <span class="sr-only">(current)</span></a>
         </li>
     </ul>
-      </nav
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary" href="{% url 'account_logout' %}" role="button">Logout</a>
+    </div>
+      </nav>
 </head>
 
 <body>
   <html>
   <div class="container mt-4">
-    <h3>Welcome to your workout page, {{name}}</h3>
-    <p>Use this page to track your progess and find new workout videos! </p>
+    <h3 style="text-align:center;" >Workouts Page</h3>
+    <p style="text-align:center;" >Use this page to track your progess and find new workout videos! </p>
   </div>
   <!--<div>
     <div class="text-center">
@@ -81,7 +81,7 @@
               <p class="card-text">{{ video.title }}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a type="button" href="{{ video.url }}" class="btn btn-sm btn-outline-secondary">View</a>
+                  <a type="button" href="{{ video.url }}" class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener noreferrer">View</a>
                 </div>
                 <small class="text-muted">{{ video.duration }} mins</small>
               </div>
@@ -113,8 +113,9 @@
       </ul>
       {% endfor %}
       <div class="card-body">
+        <a href="{% url 'social_app:UpdateWorkout' user.email %}" class="btn btn-outline-primary">Update Workout Progress</a>
         <a href="{% url 'social_app:AddWorkout' user.email %}" class="btn btn-primary">Add A Workout to list</a>
-        <a href="{% url 'social_app:UpdateWorkout' user.email %}" class="btn btn-primary">Update Workout Progress</a>
+        
       </div>
     </div>
   </div>
