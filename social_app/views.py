@@ -29,6 +29,10 @@ def ProfilePage(request, email):
             age_p = request.POST.get('age')
             heightft_p = request.POST.get('heightfeet')
             heightin_p = request.POST.get('heightinches')
+            if(name_p == "" or age_p == "" or heightft_p == "" or heightin_p == "") :
+                return render(request, 'social_app/signup.html', {
+                    'error' : "Please fill out all parts of the signup page"
+                })
             if (int(heightin_p) > 9):
                 height_p = float(int(heightft_p) + (int(heightin_p)/100))
             else:
