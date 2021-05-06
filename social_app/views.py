@@ -9,7 +9,7 @@ import requests
 from isodate import parse_duration
 from django.conf import settings
 import math
-
+#Resources used throughtout this file: https://stackoverflow.com/, https://docs.djangoproject.com/en/3.2/, https://www.w3schools.com/html/default.asp, https://www.w3schools.com/python/default.asp
 
 
 def ProfilePage(request, email):
@@ -79,10 +79,10 @@ def DashboardPage(request, email):
     })
 
 def WorkoutPage(request, email):
-    #Try to see if you can watch the youtube video in browser
     Workouts_User = Workouts.objects.get(User = User.objects.get(email=email))
     Dashboard_User = Dashboard.objects.get(User = User.objects.get(email=email))
     selected_profile = Profile.objects.get(email=email)
+    #Youtube API Resource: https://www.youtube.com/watch?v=lc2KvFbbfAQ
     videos = []
     if request.method == 'POST':
         search_url = 'https://www.googleapis.com/youtube/v3/search'
@@ -214,6 +214,10 @@ def AddWorkout(request, email):
     if request.method == 'POST':  
         name_w = request.POST.get("workoutname")
         goals_w = request.POST.get("workoutgoals")
+        if(name_w == "" or goals_w == "") :
+            return render(request, "social_app/AddWorkout.html", {
+                'error' : "Please input values for both the Workout Name or the Workout Progress",
+            })
         try:
             Dashboard_User.Workout.index(name_w)
             Workouts_User.Workout_Name.index(name_w)
@@ -255,6 +259,10 @@ def UpdateWorkout(request, email):
     if request.method == 'POST':
         name_w = request.POST.get("workoutname")
         progress_w = request.POST.get("workoutprogress")
+    if(progress_w == None) :
+        return render(request, "social_app/AddWorkout.html", {
+            'error' : "Please input a progress value for your workout",
+        })
     try:
         index = Workouts_User.Workout_Name.index(name_w)
     except(ValueError):

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'social_app',
- 
+    
+    #Resource for Google Login: https://whizzoe.medium.com/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
     'allauth',   # <--
     'allauth.account',   # <--
     'allauth.socialaccount',   # <--

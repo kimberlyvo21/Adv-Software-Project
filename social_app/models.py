@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 
-#Incorporate a new API "Facebook App - sends your ranking/awards as a post on facebook"
+#Resources used throughtout this file: https://stackoverflow.com/, https://docs.djangoproject.com/en/3.2/, https://www.postgresql.org/docs/current/datatype.html
 
 #Create a field for badges
 class Profile(models.Model):
