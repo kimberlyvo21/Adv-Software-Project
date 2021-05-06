@@ -6,7 +6,7 @@ The app runs on heroku-django, travis-ci, PostgreSQL database, Google Login, and
 
 Resources for the project can be found in the various files where outside resources were used. The main resources used were the Django Polls tutorial, Bootstrap documentation, and Python Documentation, where more specific links and other resources can be found in the files.
 
-Below you can see a general overview of the Exercise Gamification App and what each of the different tabs have in store for the user.
+Below one can see a general overview of the Exercise Gamification App and what each of the different tabs have in store for the user.
 ---------------------------------------------------------------------
 
 LOGIN:
