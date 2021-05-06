@@ -259,7 +259,7 @@ def UpdateWorkout(request, email):
     if request.method == 'POST':
         name_w = request.POST.get("workoutname")
         progress_w = request.POST.get("workoutprogress")
-    if(progress_w == None) :
+    if(progress_w == None or progress_w == "") :
         return render(request, "social_app/AddWorkout.html", {
             'error' : "Please input a progress value for your workout",
         })
